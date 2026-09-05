@@ -17,33 +17,41 @@ const { articles, exploreHref } = Astro.props;
           const primaryCategory = article.data.categories[0];
           const categoryLabel = CATEGORY_META[primaryCategory]?.label ?? primaryCategory;
           return (
-            <a href={`/articles/${article.id}`} class="scroll-reveal__frame">
-              <div class="scroll-reveal__media">
-                {article.data.heroImage ? (
-                  <img
-                    src={article.data.heroImage}
-                    alt={article.data.heroImageAlt ?? ''}
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="scroll-reveal__placeholder" aria-hidden="true" />
-                )}
-                <div class="scroll-reveal__scrim" aria-hidden="true" />
-              </div>
-              <div class="scroll-reveal__caption">
-                <p class="scroll-reveal__title font-display">{article.data.title}</p>
-                <p class="scroll-reveal__meta">
-                  {categoryLabel} · {article.data.period}
-                </p>
-              </div>
-            </a>
+            <div class="scroll-reveal__frame">
+              <a href={`/articles/${article.id}`} class="scroll-reveal__window">
+                <div class="scroll-reveal__media">
+                  {article.data.heroImage ? (
+                    <img
+                      src={article.data.heroImage}
+                      alt={article.data.heroImageAlt ?? ''}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="scroll-reveal__placeholder" aria-hidden="true" />
+                  )}
+                  <div class="scroll-reveal__scrim" aria-hidden="true" />
+                </div>
+                <div class="scroll-reveal__caption">
+                  <p class="scroll-reveal__title font-display">{article.data.title}</p>
+                  <p class="scroll-reveal__meta">
+                    {categoryLabel} · {article.data.period}
+                  </p>
+                </div>
+              </a>
+            </div>
           );
         })
       }
-      <a href={exploreHref} class="scroll-reveal__frame scroll-reveal__frame--cta">
-        <span class="scroll-reveal__cta-text font-display">Explore all stories</span>
-        <span class="scroll-reveal__cta-arrow" aria-hidden="true">&rarr;</span>
-      </a>
+      <div class="scroll-reveal__frame">
+        <a href={exploreHref} class="scroll-reveal__window scroll-reveal__window--cta">
+          <span class="scroll-reveal__cta-text font-display">Explore all stories</span>
+          <span class="scroll-reveal__cta-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-reveal__hint" aria-hidden="true">
+      <span class="scroll-reveal__hint-chevron">&darr;</span>
+      <span>Scroll</span>
     </div>
   </div>
 </section>
@@ -51,12 +59,15 @@ const { articles, exploreHref } = Astro.props;
 <style>
   .scroll-reveal {
     position: relative;
+    background: var(--color-ink-950);
   }
 
-  /* Base (always-on) fallback: a plain, fully usable full-bleed horizontal
-     swipe gallery. This is what touch devices, reduced-motion users, and
-     no-JS visitors get — JS below only upgrades it into a pinned effect. */
+  /* Base (always-on) fallback: a plain, fully usable horizontal swipe
+     gallery of "windowed" cards. This is what touch devices, reduced-motion
+     users, and no-JS visitors get — JS below only upgrades it into a pinned
+     effect on top of the exact same markup. */
   .scroll-reveal__stage {
+    position: relative;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -68,11 +79,29 @@ const { articles, exploreHref } = Astro.props;
   .scroll-reveal__frame {
     position: relative;
     flex: 0 0 100%;
-    height: 100svh;
+    height: 68svh;
     scroll-snap-align: start;
-    text-decoration: none;
+    padding: 1.25rem 4vw;
+    box-sizing: border-box;
+  }
+  @media (min-width: 768px) {
+    .scroll-reveal__frame {
+      height: 66svh;
+      padding: 1.5rem 6vw;
+    }
+  }
+
+  /* The visible "window": a rounded card inset within its slide slot,
+     rather than the photo filling the whole viewport edge-to-edge. */
+  .scroll-reveal__window {
+    position: relative;
     display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.75rem;
     overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6);
   }
 
   .scroll-reveal__media,
@@ -104,23 +133,23 @@ const { articles, exploreHref } = Astro.props;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
   }
   @media (min-width: 768px) {
     .scroll-reveal__caption {
-      padding: 3rem 4rem;
+      padding: 2.5rem;
     }
   }
   .scroll-reveal__title {
     color: var(--color-paper-50);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     line-height: 1.15;
     margin: 0 0 0.4rem;
     max-width: 34rem;
   }
   @media (min-width: 768px) {
     .scroll-reveal__title {
-      font-size: 2.75rem;
+      font-size: 2.25rem;
     }
   }
   .scroll-reveal__meta {
@@ -132,29 +161,69 @@ const { articles, exploreHref } = Astro.props;
     margin: 0;
   }
 
-  .scroll-reveal__frame--cta {
+  .scroll-reveal__window--cta {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     background: var(--color-ink-900);
+    border: 1px solid var(--color-ink-700);
   }
   .scroll-reveal__cta-text {
     color: var(--color-paper-50);
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   @media (min-width: 768px) {
     .scroll-reveal__cta-text {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
   }
   .scroll-reveal__cta-arrow {
     color: var(--color-brass-400);
-    font-size: 2rem;
+    font-size: 1.75rem;
     transition: transform 250ms ease;
   }
-  .scroll-reveal__frame--cta:hover .scroll-reveal__cta-arrow {
+  .scroll-reveal__window--cta:hover .scroll-reveal__cta-arrow {
     transform: translateX(0.4em);
+  }
+
+  /* Minimal scroll hint, pinned to the stage so it stays put while frames
+     slide underneath it. Fades out once the visitor starts scrolling. */
+  .scroll-reveal__hint {
+    position: absolute;
+    left: 50%;
+    bottom: 0.75rem;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-ink-500);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 400ms ease;
+  }
+  .scroll-reveal__hint-chevron {
+    color: var(--color-brass-400);
+    font-size: 1rem;
+    animation: scroll-reveal-bounce 1.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal__hint-chevron {
+      animation: none;
+    }
+  }
+  @keyframes scroll-reveal-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(0.3em); }
+  }
+  .scroll-reveal__hint--hidden {
+    opacity: 0;
   }
 
   /* Enhanced (JS-driven) pinned mode: vertical scroll drives horizontal
@@ -162,15 +231,20 @@ const { articles, exploreHref } = Astro.props;
   .scroll-reveal--pinned .scroll-reveal__stage {
     position: sticky;
     top: 0;
-    height: 100svh;
+    height: 68svh;
     overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .scroll-reveal--pinned .scroll-reveal__stage {
+      height: 66svh;
+    }
+  }
+  .scroll-reveal--pinned .scroll-reveal__frame {
+    height: 100%;
   }
   .scroll-reveal--pinned .scroll-reveal__track {
     height: 100%;
     will-change: transform;
-  }
-  .scroll-reveal--pinned .scroll-reveal__frame {
-    scroll-snap-align: none;
   }
 </style>
 
@@ -178,6 +252,7 @@ const { articles, exploreHref } = Astro.props;
   function initScrollReveal(section: HTMLElement) {
     const stageEl = section.querySelector<HTMLElement>('.scroll-reveal__stage');
     const trackEl = section.querySelector<HTMLElement>('.scroll-reveal__track');
+    const hint = section.querySelector<HTMLElement>('.scroll-reveal__hint');
     if (!stageEl || !trackEl) return;
     // Re-bind as non-nullable: TS control-flow narrowing above doesn't carry
     // into the nested closures below, since they could in theory be called
@@ -187,21 +262,38 @@ const { articles, exploreHref } = Astro.props;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    if (reduceMotion || coarsePointer) return; // keep the plain swipeable fallback
+
+    if (reduceMotion || coarsePointer) {
+      // Plain swipeable fallback: just fade the hint once the visitor swipes.
+      stage.addEventListener(
+        'scroll',
+        () => {
+          if (stage.scrollLeft > 8) hint?.classList.add('scroll-reveal__hint--hidden');
+        },
+        { passive: true, once: true }
+      );
+      return;
+    }
 
     section.classList.add('scroll-reveal--pinned');
 
     function layout() {
       const maxTranslate = Math.max(0, track.scrollWidth - stage.clientWidth);
-      section.style.height = `calc(100svh + ${maxTranslate}px)`;
+      // Section height = the stage's own (in-flow, pre-stick) height, plus
+      // however much extra scroll distance the horizontal slide needs.
+      // Sticky naturally pins for exactly (section height - stage height),
+      // so measuring stage.offsetHeight directly (rather than assuming it
+      // equals 100svh) keeps this correct regardless of the stage's CSS size.
+      section.style.height = `${stage.offsetHeight + maxTranslate}px`;
     }
 
     function update() {
       const maxTranslate = Math.max(0, track.scrollWidth - stage.clientWidth);
-      const scrollable = section.offsetHeight - window.innerHeight;
+      const scrollable = section.offsetHeight - stage.offsetHeight;
       const rect = section.getBoundingClientRect();
       const progress = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
       track.style.transform = `translate3d(${-progress * maxTranslate}px, 0, 0)`;
+      if (progress > 0.03) hint?.classList.add('scroll-reveal__hint--hidden');
     }
 
     let ticking = false;

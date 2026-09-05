@@ -11,6 +11,9 @@ const sorted = [...allArticles].sort(
 );
 const featured = sorted.slice(0, 6);
 const latest = sorted.slice(0, 6);
+// Kept short on purpose: each story costs the visitor a full scroll "page"
+// in the cinematic reveal above, so start with a handful, not the full list.
+const topStories = sorted.slice(0, 3);
 ---
 
 <BaseLayout title="Home">
@@ -19,7 +22,7 @@ const latest = sorted.slice(0, 6);
     <h1 class="font-display hero__title">A record of the past</h1>
   </section>
 
-  {featured.length > 0 && <ScrollReveal articles={featured} exploreHref="#browse-stories" />}
+  {topStories.length > 0 && <ScrollReveal articles={topStories} exploreHref="#browse-stories" />}
 
   {
     featured.length > 0 && (
@@ -63,7 +66,7 @@ const latest = sorted.slice(0, 6);
   .hero {
     max-width: 48rem;
     margin-inline: auto;
-    padding: 4rem 1.25rem 2rem;
+    padding: 2.5rem 1.25rem 1.5rem;
     text-align: left;
   }
   .hero__eyebrow {
@@ -72,7 +75,7 @@ const latest = sorted.slice(0, 6);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-brass-400);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
   .hero__title {
     color: var(--color-paper-50);

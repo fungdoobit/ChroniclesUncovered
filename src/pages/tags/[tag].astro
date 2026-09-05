@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+import { tagToSlug } from '@/lib/tags';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  const bySlug = new Map<string, { label: string; articles: typeof articles }>();
+  for (const article of articles) {
+    for (const tag of article.data.tags) {
+      const slug = tagToSlug(tag);
+      const existing = bySlug.get(slug);
+      if (existing) {
+        existing.articles.push(article);
+      } else {
+        bySlug.set(slug, { label: tag, articles: [article] });
+      }
+    }
+  }
+  return Array.from(bySlug.entries()).map(([tag, { label, articles }]) => ({
+    params: { tag },
+    props: { label, articles },
+  }));
+}
+
+const { label, articles } = Astro.props;
+const sorted = [...articles].sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+---
+
+<BaseLayout title={`#${label}`} description={`Articles tagged ${label}.`}>
+  <section class="tag-hero">
+    <p class="tag-hero__eyebrow">Tag</p>
+    <h1 class="font-display tag-hero__title">#{label}</h1>
+  </section>
+  <section class="tag-grid">
+    <div class="grid">
+      {sorted.map((article) => (
+        <ArticleCard article={article} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tag-hero {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem 1.5rem;
+  }
+  .tag-hero__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brass-400);
+    margin-bottom: 0.5rem;
+  }
+  .tag-hero__title {
+    color: var(--color-paper-50);
+    font-size: 2.25rem;
+    margin: 0;
+  }
+  .tag-grid {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 0 1.25rem 4rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.5rem;
+  }
+</style>

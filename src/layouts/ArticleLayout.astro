@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import SourceList from '@/components/SourceList.astro';
 import { CATEGORY_META, STATUS_META } from '@/lib/categories';
+import { tagToSlug } from '@/lib/tags';
 
 interface Props {
   entry: CollectionEntry<'articles'>;
@@ -13,7 +14,7 @@ const status = STATUS_META[data.status];
 const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<BaseLayout title={data.title} description={data.summary}>
+<BaseLayout title={data.title} description={data.summary} image={data.heroImage} article>
   <article class="article">
     <header class="article__header">
       <div class="article__header-inner">
@@ -46,6 +47,15 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 
         )}
         {data.sensitivity && (
           <p class="article__sensitivity">{data.sensitivity}</p>
+        )}
+        {data.tags.length > 0 && (
+          <ul class="article__tags">
+            {data.tags.map((tag) => (
+              <li>
+                <a href={`/tags/${tagToSlug(tag)}`}>#{tag}</a>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
       {
@@ -121,6 +131,27 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 
     font-size: 0.8rem;
     color: var(--color-ink-500);
     margin-top: 0.5rem;
+  }
+  .article__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0;
+    list-style: none;
+  }
+  .article__tags a {
+    font-size: 0.75rem;
+    color: var(--color-paper-200);
+    background: var(--color-ink-900);
+    border: 1px solid var(--color-ink-700);
+    border-radius: 999px;
+    padding: 0.3em 0.85em;
+    text-decoration: none;
+  }
+  .article__tags a:hover {
+    color: var(--color-brass-400);
+    border-color: var(--color-brass-500);
   }
   .article__hero {
     max-width: 64rem;

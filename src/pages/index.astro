@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
 import StoryCards from '@/components/StoryCards.astro';
 import ArticleCard from '@/components/ArticleCard.astro';
 
@@ -15,20 +16,16 @@ const latest = sorted.slice(0, 6);
 <BaseLayout title="Home">
   <section class="hero">
     <p class="hero__eyebrow">A history site built from Sabah outward</p>
-    <h1 class="font-display hero__title">
-      The parts of the story people usually skip — and why they still matter.
-    </h1>
-    <p class="hero__lede">
-      Sabah and North Borneo, Malaya and Malaysia, the war that reshaped Southeast Asia, and
-      the disputes historians still argue about. Told with sources, not slogans.
-    </p>
+    <h1 class="font-display hero__title">A record of the past</h1>
   </section>
+
+  {featured.length > 0 && <ScrollReveal articles={featured} exploreHref="#browse-stories" />}
 
   {
     featured.length > 0 && (
-      <section class="section">
+      <section class="section" id="browse-stories">
         <div class="section__heading">
-          <h2 class="font-display">Start here</h2>
+          <h2 class="font-display">All stories</h2>
         </div>
         <StoryCards articles={featured} />
       </section>
@@ -99,6 +96,7 @@ const latest = sorted.slice(0, 6);
     max-width: 72rem;
     margin-inline: auto;
     padding: 2rem 1.25rem;
+    scroll-margin-top: 5rem;
   }
   .section__heading h2 {
     color: var(--color-paper-50);

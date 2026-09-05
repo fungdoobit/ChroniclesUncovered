@@ -37,6 +37,12 @@ html {
   color-scheme: dark;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background-color: var(--color-ink-950);
   color: var(--color-paper-100);

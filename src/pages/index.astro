@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import StoryCards from '@/components/StoryCards.astro';
+import ArticleCard from '@/components/ArticleCard.astro';
+
+const allArticles = await getCollection('articles');
+const sorted = [...allArticles].sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+const featured = sorted.slice(0, 6);
+const latest = sorted.slice(0, 6);
+---
+
+<BaseLayout title="Home">
+  <section class="hero">
+    <p class="hero__eyebrow">A history site built from Sabah outward</p>
+    <h1 class="font-display hero__title">
+      The parts of the story people usually skip — and why they still matter.
+    </h1>
+    <p class="hero__lede">
+      Sabah and North Borneo, Malaya and Malaysia, the war that reshaped Southeast Asia, and
+      the disputes historians still argue about. Told with sources, not slogans.
+    </p>
+  </section>
+
+  {
+    featured.length > 0 && (
+      <section class="section">
+        <div class="section__heading">
+          <h2 class="font-display">Start here</h2>
+        </div>
+        <StoryCards articles={featured} />
+      </section>
+    )
+  }
+
+  {
+    latest.length > 0 && (
+      <section class="section">
+        <div class="section__heading">
+          <h2 class="font-display">Latest</h2>
+        </div>
+        <div class="grid">
+          {latest.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    allArticles.length === 0 && (
+      <section class="section">
+        <p class="hero__lede">
+          No articles yet — content is on its way. Start with{' '}
+          <code>src/content/articles/</code>.
+        </p>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .hero {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 4rem 1.25rem 2rem;
+    text-align: left;
+  }
+  .hero__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-brass-400);
+    margin-bottom: 1rem;
+  }
+  .hero__title {
+    color: var(--color-paper-50);
+    font-size: 2.5rem;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+  @media (min-width: 768px) {
+    .hero__title {
+      font-size: 3.25rem;
+    }
+  }
+  .hero__lede {
+    color: var(--color-paper-200);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 38rem;
+  }
+
+  .section {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 2rem 1.25rem;
+  }
+  .section__heading h2 {
+    color: var(--color-paper-50);
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.5rem;
+  }
+</style>

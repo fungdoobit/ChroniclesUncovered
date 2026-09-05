@@ -1,0 +1,131 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORY_META, STATUS_META } from '@/lib/categories';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+const { article } = Astro.props;
+const primaryCategory = article.data.categories[0];
+const categoryLabel = CATEGORY_META[primaryCategory]?.label ?? primaryCategory;
+const status = STATUS_META[article.data.status];
+---
+
+<a href={`/articles/${article.id}`} class="article-card group">
+  <div class="article-card__media">
+    {
+      article.data.heroImage ? (
+        <img src={article.data.heroImage} alt={article.data.heroImageAlt ?? ''} loading="lazy" />
+      ) : (
+        <div class="article-card__placeholder" aria-hidden="true" />
+      )
+    }
+    <div class="article-card__badges">
+      {article.data.sample && <span class="badge badge--sample">Sample content</span>}
+      <span class="badge" style={`--badge-color: ${status.color}`}>{status.label}</span>
+    </div>
+  </div>
+  <div class="article-card__body">
+    <span class="article-card__eyebrow">{categoryLabel}</span>
+    <h3 class="article-card__title font-display">{article.data.title}</h3>
+    <p class="article-card__summary">{article.data.summary}</p>
+    <span class="article-card__cta">Dive in →</span>
+  </div>
+</a>
+
+<style>
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: var(--color-ink-900);
+    border: 1px solid var(--color-ink-700);
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+  }
+  .article-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-brass-500);
+    box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  .article-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(155deg, var(--color-ink-700), var(--color-ink-900));
+  }
+  .article-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .article-card__placeholder {
+    position: absolute;
+    inset: 0;
+  }
+
+  .article-card__badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-950);
+    background: var(--badge-color, var(--color-paper-100));
+    border-radius: 999px;
+    padding: 0.25em 0.7em;
+  }
+  .badge--sample {
+    background: var(--color-brass-400);
+  }
+
+  .article-card__body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .article-card__eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brass-400);
+  }
+  .article-card__title {
+    color: var(--color-paper-50);
+    font-size: 1.15rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .article-card__summary {
+    color: var(--color-paper-200);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .article-card__cta {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    color: var(--color-paper-50);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .article-card:hover .article-card__cta {
+    color: var(--color-brass-400);
+  }
+</style>

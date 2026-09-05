@@ -1,0 +1,42 @@
+---
+interface Source {
+  label: string;
+  url: string;
+  note?: string;
+}
+interface Props {
+  sources: Source[];
+}
+const { sources } = Astro.props;
+---
+
+{
+  sources.length > 0 && (
+    <section class="not-prose my-12 border-t border-ink-700 pt-8" aria-labelledby="sources-heading">
+      <h2 id="sources-heading" class="font-display text-2xl text-paper-50 mb-1">
+        Sources and further reading
+      </h2>
+      <p class="text-sm text-ink-500 mb-6">
+        Cited in order of use. Primary and archival sources are preferred over secondary summaries.
+      </p>
+      <ol class="space-y-4">
+        {sources.map((source, i) => (
+          <li class="flex gap-3 rounded-lg border border-ink-700 bg-ink-900/60 p-4">
+            <span class="font-display text-brass-400 text-sm pt-0.5">{i + 1}</span>
+            <div>
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-paper-50 hover:text-brass-400 underline underline-offset-2 decoration-ink-600"
+              >
+                {source.label}
+              </a>
+              {source.note && <p class="text-sm text-ink-500 mt-1">{source.note}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="Why this site exists.">
+  <section class="page">
+    <h1 class="font-display page__title">About Chronicles Uncovered</h1>
+    <div class="prose-article">
+      <p>
+        This site began from a love of history — particularly the history of Sabah and North
+        Borneo, Malaya and Malaysia, and Southeast Asia more broadly. It exists to tell the
+        stories that get flattened into a single sentence in most retellings: the difference
+        between 1957 and 1963, why Brunei stayed out of Malaysia, what actually happened during
+        the Japanese occupation of North Borneo, and the disputes historians and governments
+        still don't agree on.
+      </p>
+      <p>
+        Every article tries to separate established fact from mainstream interpretation,
+        disputed claims, political or legal positions, legend, and deliberate counterfactual
+        speculation — labelled inline, not blurred together. Sources are listed at the bottom of
+        every piece, and primary documents (treaties, archives, government records) are
+        preferred over secondary summaries.
+      </p>
+      <p>
+        This is a personal, ongoing project. Articles move through research notes, drafts, and
+        fact-checking before publication — you may see that status marked on a piece if it isn't
+        finished yet.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 3rem 1.25rem 4rem;
+  }
+  .page__title {
+    color: var(--color-paper-50);
+    font-size: 2.25rem;
+    margin: 0 0 1.5rem;
+  }
+</style>

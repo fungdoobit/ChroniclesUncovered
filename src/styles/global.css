@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/*
+  Design tokens for Chronicles Uncovered.
+  Dark charcoal + warm neutral base, restrained brass/archival accent,
+  serif display type paired with a clean sans body — per SITE_BLUEPRINT.md.
+*/
+@theme {
+  --font-display: 'Fraunces', 'Iowan Old Style', ui-serif, Georgia, serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #16130f;
+  --color-ink-900: #1c1814;
+  --color-ink-800: #241f19;
+  --color-ink-700: #332b23;
+  --color-ink-600: #4a4033;
+  --color-ink-500: #6b5f4d;
+
+  --color-paper-50: #faf6ee;
+  --color-paper-100: #f2ebdc;
+  --color-paper-200: #e8dcc4;
+  --color-paper-300: #d9c9a8;
+
+  --color-brass-400: #c9a35c;
+  --color-brass-500: #b3873c;
+  --color-brass-600: #96702f;
+
+  --color-signal-fact: #4f7d63;
+  --color-signal-interpretation: #4f6d8c;
+  --color-signal-disputed: #b3873c;
+  --color-signal-political: #a2542f;
+  --color-signal-legend: #7d5f9e;
+  --color-signal-counterfactual: #7a7266;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: var(--color-paper-100);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Utility for horizontal scroll containers that hide the scrollbar but stay scrollable. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.prose-article {
+  max-width: 68ch;
+}
+.prose-article p {
+  margin-block: 1.25em;
+  line-height: 1.75;
+  color: var(--color-paper-200);
+}
+.prose-article h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin-block: 1.5em 0.6em;
+  color: var(--color-paper-50);
+}
+.prose-article h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-block: 1.3em 0.5em;
+  color: var(--color-paper-50);
+}
+.prose-article ul,
+.prose-article ol {
+  margin-block: 1em;
+  padding-inline-start: 1.4em;
+  color: var(--color-paper-200);
+}
+.prose-article li {
+  margin-block: 0.4em;
+}
+.prose-article a {
+  color: var(--color-brass-400);
+  text-underline-offset: 2px;
+}
+.prose-article blockquote {
+  border-inline-start: 3px solid var(--color-brass-500);
+  padding-inline-start: 1em;
+  font-style: italic;
+  color: var(--color-paper-200);
+}

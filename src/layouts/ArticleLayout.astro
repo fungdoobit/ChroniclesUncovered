@@ -1,0 +1,142 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import SourceList from '@/components/SourceList.astro';
+import { CATEGORY_META, STATUS_META } from '@/lib/categories';
+
+interface Props {
+  entry: CollectionEntry<'articles'>;
+}
+const { entry } = Astro.props;
+const { data } = entry;
+const status = STATUS_META[data.status];
+const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <article class="article">
+    <header class="article__header">
+      <div class="article__header-inner">
+        {
+          (data.status !== 'published' || data.sample) && (
+            <div class="article__notice" role="note">
+              {data.sample ? (
+                <strong>Sample content.</strong>
+              ) : (
+                <strong>{status.label}.</strong>
+              )}{' '}
+              {data.sample
+                ? 'This article is placeholder content used to preview the site design. It is not researched history.'
+                : 'This article is still being verified and is not yet a finished, published piece — see the sources and any open verification notes below.'}
+            </div>
+          )
+        }
+        <div class="article__meta">
+          {data.categories.map((cat) => (
+            <span class="article__category">{CATEGORY_META[cat]?.label ?? cat}</span>
+          ))}
+          <span class="article__period">{data.period}</span>
+        </div>
+        <h1 class="font-display article__title">{data.title}</h1>
+        <p class="article__summary">{data.summary}</p>
+        {data.lastFactChecked && (
+          <p class="article__factchecked">
+            Last fact-checked {dateFormatter.format(data.lastFactChecked)}
+          </p>
+        )}
+        {data.sensitivity && (
+          <p class="article__sensitivity">{data.sensitivity}</p>
+        )}
+      </div>
+      {
+        data.heroImage && (
+          <div class="article__hero">
+            <img src={data.heroImage} alt={data.heroImageAlt ?? ''} />
+          </div>
+        )
+      }
+    </header>
+
+    <div class="article__body prose-article">
+      <slot />
+      <SourceList sources={data.sources} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article__header {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 2.5rem 1.25rem 1rem;
+  }
+  .article__notice {
+    background: color-mix(in srgb, var(--color-brass-500) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brass-500) 45%, transparent);
+    color: var(--color-paper-100);
+    border-radius: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+  }
+  .article__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .article__category {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-950);
+    background: var(--color-brass-400);
+    border-radius: 999px;
+    padding: 0.2em 0.75em;
+  }
+  .article__period {
+    font-size: 0.8rem;
+    color: var(--color-ink-500);
+  }
+  .article__title {
+    color: var(--color-paper-50);
+    font-size: 2.25rem;
+    line-height: 1.1;
+    margin: 0 0 0.75rem;
+  }
+  @media (min-width: 768px) {
+    .article__title {
+      font-size: 3rem;
+    }
+  }
+  .article__summary {
+    font-size: 1.15rem;
+    color: var(--color-paper-200);
+    line-height: 1.5;
+  }
+  .article__factchecked,
+  .article__sensitivity {
+    font-size: 0.8rem;
+    color: var(--color-ink-500);
+    margin-top: 0.5rem;
+  }
+  .article__hero {
+    max-width: 64rem;
+    margin: 1.5rem auto 0;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+  }
+  .article__hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .article__body {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+</style>

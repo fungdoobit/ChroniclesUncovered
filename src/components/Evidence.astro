@@ -1,0 +1,69 @@
+---
+// Inline evidence-level marker for use inside MDX article prose.
+// Encodes CLAUDE.md rule #3: never flatten fact, interpretation, dispute,
+// political/legal position, legend, and counterfactual into one voice.
+interface Props {
+  level:
+    | 'fact'
+    | 'interpretation'
+    | 'disputed'
+    | 'political'
+    | 'legend'
+    | 'counterfactual';
+}
+
+const { level } = Astro.props;
+
+const LABELS: Record<Props['level'], string> = {
+  fact: 'Established fact',
+  interpretation: 'Mainstream interpretation',
+  disputed: 'Disputed claim',
+  political: 'Political / legal position',
+  legend: 'Legend or uncertain tradition',
+  counterfactual: 'Counterfactual',
+};
+
+const COLORS: Record<Props['level'], string> = {
+  fact: 'var(--color-signal-fact)',
+  interpretation: 'var(--color-signal-interpretation)',
+  disputed: 'var(--color-signal-disputed)',
+  political: 'var(--color-signal-political)',
+  legend: 'var(--color-signal-legend)',
+  counterfactual: 'var(--color-signal-counterfactual)',
+};
+
+const label = LABELS[level];
+const color = COLORS[level];
+---
+
+<span class="evidence-tag" style={`--tag-color: ${color}`}>
+  <span class="evidence-dot" aria-hidden="true"></span>
+  {label}
+</span>
+
+<style>
+  .evidence-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--tag-color);
+    border: 1px solid color-mix(in srgb, var(--tag-color) 55%, transparent);
+    background: color-mix(in srgb, var(--tag-color) 12%, transparent);
+    border-radius: 999px;
+    padding: 0.15em 0.65em 0.15em 0.5em;
+    margin-block: 0.3em;
+    line-height: 1.6;
+  }
+  .evidence-dot {
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 999px;
+    background: var(--tag-color);
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+interface Event {
+  date: string;
+  label: string;
+}
+interface Props {
+  events: Event[];
+  title?: string;
+}
+const { events, title = 'Timeline' } = Astro.props;
+---
+
+{
+  events.length > 0 && (
+    <section class="not-prose my-12 border-t border-ink-700 pt-8">
+      <h2 class="font-display text-2xl text-paper-50 mb-6">{title}</h2>
+      <ol class="relative border-s border-ink-700 ps-6 space-y-6">
+        {events.map((event) => (
+          <li class="relative">
+            <span class="absolute -start-[calc(1.5rem+4.5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-brass-400" />
+            <p class="font-display text-brass-400 text-sm">{event.date}</p>
+            <p class="text-paper-200">{event.label}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

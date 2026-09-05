@@ -1,0 +1,89 @@
+---
+import { CATEGORY_META } from '@/lib/categories';
+const categories = Object.entries(CATEGORY_META);
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div>
+      <p class="font-display text-paper-50 text-lg">Chronicles Uncovered</p>
+      <p class="text-sm text-ink-500 max-w-sm mt-2">
+        A personal history archive focused on Sabah, North Borneo, and Southeast Asia — the
+        parts of the story people usually skip, and why they still matter.
+      </p>
+    </div>
+    <div class="site-footer__links">
+      <div>
+        <p class="site-footer__heading">Explore</p>
+        <ul>
+          {
+            categories.map(([slug, meta]) => (
+              <li>
+                <a href={`/${slug}`}>{meta.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <p class="site-footer__heading">More</p>
+        <ul>
+          <li><a href="/timelines">Timelines</a></li>
+          <li><a href="/maps">Maps</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="site-footer__note">
+    This site distinguishes established fact from interpretation, dispute and speculation —
+    see the evidence tags inline in each article.
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-ink-700);
+    margin-top: 4rem;
+    padding: 3rem 1.25rem 2rem;
+  }
+  .site-footer__inner {
+    max-width: 72rem;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+  .site-footer__links {
+    display: flex;
+    gap: 3rem;
+  }
+  .site-footer__heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brass-400);
+    margin-bottom: 0.75rem;
+  }
+  .site-footer__links ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .site-footer__links a {
+    color: var(--color-paper-200);
+    text-decoration: none;
+  }
+  .site-footer__links a:hover {
+    color: var(--color-brass-400);
+  }
+  .site-footer__note {
+    max-width: 72rem;
+    margin: 2.5rem auto 0;
+    font-size: 0.75rem;
+    color: var(--color-ink-500);
+  }
+</style>

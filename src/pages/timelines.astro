@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Timelines" description="Chronological collections across articles.">
+  <section class="page">
+    <p class="page__eyebrow">Coming later</p>
+    <h1 class="font-display page__title">Timelines</h1>
+    <p class="page__lede">
+      A dedicated, cross-article chronological view is planned for a later phase — for now,
+      each article carries its own timeline at the bottom of the piece.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: 4rem 1.25rem;
+  }
+  .page__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brass-400);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    color: var(--color-paper-50);
+    font-size: 2.25rem;
+    margin: 0 0 1rem;
+  }
+  .page__lede {
+    color: var(--color-paper-200);
+    line-height: 1.6;
+    max-width: 38rem;
+  }
+</style>

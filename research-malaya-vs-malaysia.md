@@ -135,6 +135,19 @@ Your `HISTORY_RESEARCH.md` (section 13) already has a fuller 12-item verificatio
 
 One item **not** on your checklist that this research surfaced and is worth adding to it: **Kalabakan, 29 December 1963** — a Sabah-specific Konfrontasi engagement mentioned in `HISTORY_RESEARCH.md` but not yet researched by me at all.
 
+## 12. Verification session — 5 September 2026
+
+Fetched and read directly (not summarised secondhand): the UN Treaty Collection's registration page and the full registered treaty text (UNTS vol. 750, Treaty No. 10760, `volume-750-I-10760-English.pdf`, 235 pp.), and Sabah's own State Attorney-General's Chambers copy of MA63. This resolves **item #3** (North Borneo's exact constitutional status around 31 Aug/16 Sept 1963) with primary text rather than a secondary paraphrase:
+
+- **The 31 August 1963 date was the original plan, written into the treaty itself.** Article II of the Agreement relating to Malaysia as signed on 9 July 1963 named "31st August 1963" as Malaysia Day.
+- **It was changed by a formal treaty amendment, not an informal postponement.** A short amending agreement, signed at **Singapore on 28 August 1963** — three days before the original date — substitutes "16th September" for "31st August" in Article II. It's signed by Duncan Sandys (UK), Abdul Razak (Federation of Malaya), **D. A. (Donald) Stephens for North Borneo**, S. K. Ningkan (Sarawak), and Goh Keng Swee (Singapore). Per the UN's registration footnote, this amendment itself came into force 11 September 1963, with effect from 16 September 1963.
+- **British sovereignty over North Borneo did not end on 31 August.** Article IV of the original agreement provides for the UK to secure an Act "providing for the relinquishment, **as from Malaysia Day**, of Her Britannic Majesty's sovereignty and jurisdiction in respect of North Borneo, Sarawak and Singapore" — and the Sabah State Constitution annexed to the agreement (Annex B) is likewise drafted throughout around "Malaysia Day" as its commencement point, not 31 August.
+- **Net effect for the article:** whatever happened in North Borneo on 31 August 1963 (Donald Stephens sworn in, internal self-government) was under separate British colonial constitutional machinery, not the Malaysia Agreement's own Sabah State Constitution — which only took legal effect, along with the transfer of sovereignty, on 16 September. This directly confirms the cautious wording `HISTORY_RESEARCH.md` already recommended, now against primary treaty text.
+
+**Still open, narrower than before:** the specific British Order in Council / colonial instrument that granted North Borneo internal self-government effective 31 August 1963 itself — I have what MA63 says about sovereignty timing, but not that specific instrument's text. `legislation.gov.uk`, UK Parliament Hansard, and Wikisource were not reachable this session to chase it further.
+
+**Not attempted this session** (still open per §11 above): Cobbold Commission's exact statistical language, the 20 Points/IGC/MA63 relationship in legal detail, Brunei's negotiation terms, Singapore's financial disputes, the Sulu payment history, and current Philippine/Malaysian official positions. None of these block the current article draft — they matter more for the Cobbold, 20 Points, Brunei, Singapore and Philippines articles later in the series.
+
 ## Sources Consulted
 
 **Note on sourcing standard**: your `CLAUDE.md` rules out Wikipedia as a final citation source and rules out AI-generated summaries entirely (I noticed sites like Grokipedia surfacing in my search results — flagging that as a source to actively avoid, not just deprioritise, since it's literally AI-generated text). Your own `SOURCES.md` has a stronger, more authoritative starting list than what I used below (official Malaysian and Singaporean government/archival pages, the UN Treaty Collection, Parliament records, and Sabah's own State Attorney-General's Chambers). For the finished article, that list should take precedence over the Wikipedia/Wikisource-heavy list below — treat mine as an initial pass that located the right facts, not the final citation set.
@@ -142,6 +155,10 @@ One item **not** on your checklist that this research surfaced and is worth addi
 **Verified directly this session (primary sources)**
 - United Nations, "Malaysia" member-state page — confirms Malaya joined the UN 17 Sept 1957 and was renamed Malaysia on 16 Sept 1963: https://www.un.org/en/about-us/member-states/malaysia
 - UN Treaty Collection, registration of the "Agreement relating to Malaysia" (Treaty No. 10760) — confirms signatories, London/9 July 1963 conclusion, and 16 September 1963 entry into force per Article II, with links to the full English/French text: https://treaties.un.org/pages/showDetails.aspx?objid=080000028011f470
+
+**Verified directly, 5 September 2026 (full registered treaty text, read in full, not summarised)**
+- UN Treaty Series vol. 750, Treaty No. 10760, full English text incl. annexes and the 28 August 1963 amending agreement: https://treaties.un.org/doc/Publication/UNTS/Volume%20750/volume-750-I-10760-English.pdf — source for Article I (federation and renaming), Article II (original 31 Aug 1963 date), Article IV (sovereignty relinquished "as from Malaysia Day"), the Sabah State Constitution at Annex B, and the amending agreement of 28 August 1963 with its signatories.
+- Sabah State Attorney-General's Chambers, official reference copy of MA63 (original, unamended text, "FOR REFERENCE ONLY," dated January 2017): https://sagc.sabah.gov.my/sites/default/files/law/AgreementRelatingToMalaysia.pdf
 
 **Primary / archival**
 - UN Malaysia Mission, "Final Conclusions of the Secretary-General," 14 Sept 1963 — Official Gazette of the Republic of the Philippines: https://www.officialgazette.gov.ph/1963/09/14/united-nations-malaysia-mission-report-final-conclusions-of-the-secretary-general-14-september-1963/

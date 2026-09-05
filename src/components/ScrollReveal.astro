@@ -277,13 +277,19 @@ const { articles, exploreHref } = Astro.props;
 
     section.classList.add('scroll-reveal--pinned');
 
+    // The site header is also position:sticky at top:0 with a higher
+    // z-index, so pinning this stage at top:0 too would put the header
+    // permanently over the card's top edge for the whole scroll. Pin the
+    // stage just below the header instead, and fold that offset into the
+    // progress math (sticky still pins for exactly stage's height less than
+    // the section's height — the top offset only changes *when* it engages).
+    function headerHeight() {
+      return document.querySelector<HTMLElement>('.site-header')?.offsetHeight ?? 0;
+    }
+
     function layout() {
+      stage.style.top = `${headerHeight()}px`;
       const maxTranslate = Math.max(0, track.scrollWidth - stage.clientWidth);
-      // Section height = the stage's own (in-flow, pre-stick) height, plus
-      // however much extra scroll distance the horizontal slide needs.
-      // Sticky naturally pins for exactly (section height - stage height),
-      // so measuring stage.offsetHeight directly (rather than assuming it
-      // equals 100svh) keeps this correct regardless of the stage's CSS size.
       section.style.height = `${stage.offsetHeight + maxTranslate}px`;
     }
 
@@ -291,7 +297,10 @@ const { articles, exploreHref } = Astro.props;
       const maxTranslate = Math.max(0, track.scrollWidth - stage.clientWidth);
       const scrollable = section.offsetHeight - stage.offsetHeight;
       const rect = section.getBoundingClientRect();
-      const progress = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
+      const progress =
+        scrollable > 0
+          ? Math.min(1, Math.max(0, (headerHeight() - rect.top) / scrollable))
+          : 0;
       track.style.transform = `translate3d(${-progress * maxTranslate}px, 0, 0)`;
       if (progress > 0.03) hint?.classList.add('scroll-reveal__hint--hidden');
     }

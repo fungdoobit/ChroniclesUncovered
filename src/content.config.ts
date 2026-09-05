@@ -25,6 +25,10 @@ const articles = defineCollection({
     lastFactChecked: z.coerce.date().optional(),
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
+    // Required whenever heroImage is a real photograph (not the gradient
+    // placeholder): who to credit and, ideally, a link to the source item.
+    heroImageCredit: z.string().optional(),
+    heroImageCreditUrl: z.string().url().optional(),
     // Placeholder content that must never be mistaken for a researched article.
     sample: z.boolean().default(false),
     sources: z

@@ -13,7 +13,11 @@ const featured = sorted.slice(0, 6);
 const latest = sorted.slice(0, 6);
 // Kept short on purpose: each story costs the visitor a full scroll "page"
 // in the cinematic reveal above, so start with a handful, not the full list.
-const topStories = sorted.slice(0, 3);
+// Real articles first — a [Sample] placeholder shouldn't be the very first
+// thing a visitor scrolls into.
+const topStories = [...sorted]
+  .sort((a, b) => Number(a.data.sample) - Number(b.data.sample))
+  .slice(0, 3);
 ---
 
 <BaseLayout title="Home">

@@ -60,9 +60,22 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 
       </div>
       {
         data.heroImage && (
-          <div class="article__hero">
-            <img src={data.heroImage} alt={data.heroImageAlt ?? ''} />
-          </div>
+          <figure class="article__hero">
+            <div class="article__hero-frame">
+              <img src={data.heroImage} alt={data.heroImageAlt ?? ''} />
+            </div>
+            {data.heroImageCredit && (
+              <figcaption class="article__hero-credit">
+                {data.heroImageCreditUrl ? (
+                  <a href={data.heroImageCreditUrl} target="_blank" rel="noopener noreferrer">
+                    {data.heroImageCredit}
+                  </a>
+                ) : (
+                  data.heroImageCredit
+                )}
+              </figcaption>
+            )}
+          </figure>
         )
       }
     </header>
@@ -156,14 +169,30 @@ const dateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 
   .article__hero {
     max-width: 64rem;
     margin: 1.5rem auto 0;
+  }
+  .article__hero-frame {
     border-radius: 1.5rem;
     overflow: hidden;
     aspect-ratio: 16 / 9;
   }
-  .article__hero img {
+  .article__hero-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .article__hero-credit {
+    margin-top: 0.6rem;
+    padding-inline: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-ink-500);
+  }
+  .article__hero-credit a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .article__hero-credit a:hover {
+    color: var(--color-brass-400);
   }
   .article__body {
     max-width: 48rem;

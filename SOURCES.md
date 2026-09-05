@@ -233,22 +233,29 @@ Useful for:
 
 # Sandakan and WWII in North Borneo
 
-## Australian War Memorial — Sandakan Remembrance
-https://www.awm.gov.au/commemoration/sandakan-ceremony-2026
+## Australian War Memorial — research guide: Prisoners of the Japanese, Borneo (Sandakan)
+https://www.awm.gov.au/research/guide/pow-ww2-borneo
 
-Essential for:
-- approximately 2,400 Allied prisoners
-- Sandakan airfield labour
-- 260 km marches
-- six Australian survivors
+Verified directly (5 September 2026). Essential for:
+- 2,500 Australian and British prisoners of war total (AWM's own figure — the earlier
+  "approximately 2,400" figure and this page's dead URL, both below, should be treated as
+  superseded by this one)
+- two marches: January 1945 and May 1945
+- camp commandant: Captain Hoshijima Susumi
 
 ## Australian War Memorial — Stolen Years: Sandakan
 https://www.awm.gov.au/visit/exhibitions/stolenyears/ww2/japan/sandakan
 
-Useful for:
-- POW conditions
-- forced labour
-- march narrative
+Verified directly (5 September 2026). Useful for:
+- POW conditions, forced labour
+- ~260 km march distance, confirmed in AWM's own words
+- prisoners too weak to march were left behind at Sandakan and died or were killed there
+
+## [Dead link] Australian War Memorial — "Sandakan Remembrance"
+https://www.awm.gov.au/commemoration/sandakan-ceremony-2026
+
+This URL 404s as of 5 September 2026 — do not reuse. It's what originally supplied the
+"approximately 2,400 prisoners" figure; the research guide above (2,500) supersedes it.
 
 ## Australian Department of Veterans' Affairs — Sandakan Memorial Park
 https://www.dva.gov.au/recognition/commemorations/interpretive-centres-and-education/sandakan-memorial-park-malaysia

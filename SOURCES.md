@@ -257,6 +257,16 @@ https://www.awm.gov.au/commemoration/sandakan-ceremony-2026
 This URL 404s as of 5 September 2026 — do not reuse. It's what originally supplied the
 "approximately 2,400 prisoners" figure; the research guide above (2,500) supersedes it.
 
+## Hero image — Sandakan Memorial monument, Wikimedia Commons
+https://commons.wikimedia.org/wiki/File:Sandakan_Memorial_monument.jpg
+
+Photo by Enziee, CC BY 4.0. Used as the Sandakan article's hero image (a modern photo of the
+memorial itself, since no photographs of the marches exist — no cameras were present in Japanese
+captivity in the jungle). An earlier version of this article used an AWM aerial reconnaissance
+photograph (accession 106502) of the airfield/camp instead; that image is still public domain and
+useful for a future "what the camp looked like" section, but was judged too low-resolution and
+document-like (grainy scan with military annotations) for a hero image.
+
 ## Australian Department of Veterans' Affairs — Sandakan Memorial Park
 https://www.dva.gov.au/recognition/commemorations/interpretive-centres-and-education/sandakan-memorial-park-malaysia
 

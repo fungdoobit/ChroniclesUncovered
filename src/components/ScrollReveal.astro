@@ -92,12 +92,19 @@ const { articles, exploreHref } = Astro.props;
   }
 
   /* The visible "window": a rounded card inset within its slide slot,
-     rather than the photo filling the whole viewport edge-to-edge. */
+     rather than the photo filling the whole viewport edge-to-edge.
+     Width is capped so the box keeps a sane aspect ratio on wide monitors
+     — without this, height (tied to viewport height) stays roughly fixed
+     while width keeps growing with the screen, so the window turns into an
+     extremely wide, short rectangle and object-fit: cover crops portrait
+     photos down to an unrecognisable sliver. */
   .scroll-reveal__window {
     position: relative;
     display: block;
     width: 100%;
+    max-width: min(64rem, 78svh);
     height: 100%;
+    margin-inline: auto;
     border-radius: 1.75rem;
     overflow: hidden;
     text-decoration: none;
@@ -113,6 +120,7 @@ const { articles, exploreHref } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 25%;
   }
   .scroll-reveal__placeholder {
     background: linear-gradient(155deg, var(--color-ink-700), var(--color-ink-950));
